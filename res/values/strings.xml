@@ -29,8 +29,10 @@
 	<string name="tutorialpicture2">IP Address "10.20.59.5" Gateway "10.20.59.1"</string>
 	<string name="leftjoy">Left Onscreen Controller</string>
 	<string name="rightjoy">Right Onscreen Controller</string>
+	<string name="thirdjoy">Third Onscreen Controller</string>
 	<string name="physicaljoy">Physical Controller</string>
 	<string name="leftthrottle">Left Onscreen Throttle</string>
 	<string name="rightthrottle">Right Onscreen Throttle</string>
+	<string name="thirdthrottle">Third Onscreen Throttle</string>
     
 </resources>

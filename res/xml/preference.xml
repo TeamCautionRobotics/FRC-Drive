@@ -23,6 +23,13 @@
             android:key="rightjoy"
             android:summary="Set the USB port"
             android:title="@string/rightjoy" />
+		<ListPreference
+            android:defaultValue="3"
+            android:entries="@array/joystickports"
+            android:entryValues="@array/joystickportsvalue"
+            android:key="thirdjoy"
+            android:summary="Set the USB port"
+            android:title="@string/thirdjoy" />
         <ListPreference
             android:defaultValue="3"
             android:entries="@array/joystickports"
@@ -48,6 +55,13 @@
             android:key="rightthrottle"
             android:summary="Set the axis"
             android:title="@string/rightthrottle" />
+		<ListPreference
+            android:defaultValue="3"
+            android:entries="@array/throttleaxis"
+            android:entryValues="@array/throttleaxisvalue"
+            android:key="thirdthrottle"
+            android:summary="Set the axis"
+            android:title="@string/thirdthrottle" />
     </PreferenceCategory>
     <PreferenceCategory
         android:summary="About"
@@ -58,7 +72,7 @@
             android:title="Version 1.0.1" />
         <PreferenceScreen
             android:key="preferencescreen_about"
-            android:summary="FRC Team 2059 The Hitchhikers"
+            android:summary="FRC Team 2059 The Hitchhikers\n\nEdited by Braeden Atlee\nFRC 1492 Team Caution"
             android:title="Created by Christian Colglazier" />
     </PreferenceCategory>
 

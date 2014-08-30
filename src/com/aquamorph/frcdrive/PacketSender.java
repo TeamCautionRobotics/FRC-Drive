@@ -28,9 +28,11 @@ public class PacketSender extends Thread{
 	private PhysicalJoystick phyJoy;
 	private int leftjoy;
 	private int rightjoy;
+	private int thirdjoy;
 	private int physicaljoy;
 	private int leftthrottle;
 	private int rightthrottle;
+	private int thirdthrottle;
 	private boolean isRobotNet = false;
 	private byte[] joystick1Axis= new byte[6];
 	private byte[] joystick2Axis= new byte[6];
@@ -41,9 +43,12 @@ public class PacketSender extends Thread{
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity);
 		leftjoy = Integer.parseInt(settings.getString("leftjoy", "1"));
 		rightjoy = Integer.parseInt(settings.getString("rightjoy", "2"));
+		thirdjoy = Integer.parseInt(settings.getString("thirdjoy", "3"));
 		physicaljoy = Integer.parseInt(settings.getString("physicaljoy", "3"));
 		leftthrottle = Integer.parseInt(settings.getString("leftthrottle", "3"))-1;
 		rightthrottle = Integer.parseInt(settings.getString("rightthrottle", "3"))-1;
+		thirdthrottle = Integer.parseInt(settings.getString("thirdthrottle", "3"))-1;
+		
 		this.activity = activity;
 		ui = uiMngr;
 		phyJoy = physicalJoystick;
@@ -146,6 +151,25 @@ public class PacketSender extends Thread{
 						joystick4Axis[0]=(byte) (joystick4Axis[0]+ui.joy2X);
 						joystick4Axis[1]=(byte) (joystick4Axis[1]+ui.joy2Y);
 						joystick4Axis[rightthrottle]=(byte) (joystick4Axis[rightthrottle]+ui.throttleAxis2);
+					}
+					
+					//Third onscreen controls
+					if(thirdjoy==1) {
+						joystick1Axis[0]=(byte) (joystick1Axis[0]+ui.joy3X);
+						joystick1Axis[1]=(byte) (joystick1Axis[1]+ui.joy3Y);
+						joystick1Axis[thirdthrottle]=(byte) (joystick1Axis[thirdthrottle]+ui.throttleAxis3);
+					} else if(thirdjoy==2) {
+						joystick2Axis[0]=(byte) (joystick2Axis[0]+ui.joy3X);
+						joystick2Axis[1]=(byte) (joystick2Axis[1]+ui.joy3Y);
+						joystick2Axis[thirdthrottle]=(byte) (joystick2Axis[thirdthrottle]+ui.throttleAxis3);
+					} else if(thirdjoy==3) {
+						joystick3Axis[0]=(byte) (joystick3Axis[0]+ui.joy3X);
+						joystick3Axis[1]=(byte) (joystick3Axis[1]+ui.joy3Y);
+						joystick3Axis[thirdthrottle]=(byte) (joystick3Axis[thirdthrottle]+ui.throttleAxis3);
+					} else if(thirdjoy==4) {
+						joystick4Axis[0]=(byte) (joystick4Axis[0]+ui.joy3X);
+						joystick4Axis[1]=(byte) (joystick4Axis[1]+ui.joy3Y);
+						joystick4Axis[thirdthrottle]=(byte) (joystick4Axis[thirdthrottle]+ui.throttleAxis3);
 					}
 					
 					//Physical controls

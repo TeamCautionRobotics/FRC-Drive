@@ -24,19 +24,26 @@ public class Controls {
 	public byte joy1Y = 0;
 	public byte joy2X = 0;
 	public byte joy2Y = 0;
+	public byte joy3X = 0;
+	public byte joy3Y = 0;
 	public byte throttleAxis1 = 0;
 	public byte throttleAxis2 = 0;
+	public byte throttleAxis3 = 0;
 	public boolean[] Joy1Bttns = new boolean[12];
 	public boolean[] Joy2Bttns = new boolean[12];
-
+	public boolean[] Joy3Bttns = new boolean[12];
+	
 	private Joystick joystick1;
 	private Joystick joystick2;
+	private Joystick joystick3;
 	private Throttle throttle1;
 	private Throttle throttle2;
+	private Throttle throttle3;
 	private ToggleButton enableBttn;
 	private RadioButton enableAuto;
 	private ViewGroup Joy1Buttons;
 	private ViewGroup Joy2Buttons;
+	private ViewGroup Joy3Buttons;
 	
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -45,16 +52,20 @@ public class Controls {
 		// Initialize UI components.
 		joystick1 = (Joystick) activity.findViewById(R.id.joystick1);
 		joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
+		joystick3 = (Joystick) activity.findViewById(R.id.joystick3);
 		throttle1 = (Throttle) activity.findViewById(R.id.throttle1);
 		throttle2 = (Throttle) activity.findViewById(R.id.throttle2);
+		throttle3 = (Throttle) activity.findViewById(R.id.throttle3);
 		enableBttn = (ToggleButton) activity.findViewById(R.id.enable_button);
 		enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
 
 		// Set event listeners
 		joystick1.setOnChangeListener(joyListener1);
 		joystick2.setOnChangeListener(joyListener2);
+		joystick3.setOnChangeListener(joyListener3);
 		throttle1.setOnChangeListener(throttleListener1);
 		throttle2.setOnChangeListener(throttleListener2);
+		throttle3.setOnChangeListener(throttleListener3);
 		enableBttn.setOnCheckedChangeListener(enableListener);
 		enableAuto.setOnCheckedChangeListener(autoListener);
 		
@@ -112,6 +123,30 @@ public class Controls {
 				}
 			});
 		}
+		
+		// Joystick three buttons
+		Joy3Buttons = (ViewGroup) activity.findViewById(R.id.Joy3Buttons);
+		for (int i = 0; i < Joy3Buttons.getChildCount(); i++) {
+			final int x = i;
+			// Add listeners to the buttons.
+			final Button bttn = (Button) Joy3Buttons.getChildAt(i);
+
+			bttn.setOnTouchListener(new OnTouchListener() {
+
+					public boolean onTouch(View view, MotionEvent event) {
+						Log.d("Buttons", "Button hit: " + x);
+						switch (event.getAction()) {
+							case MotionEvent.ACTION_DOWN:
+								Joy3Bttns[x] = true;
+								break;
+							case MotionEvent.ACTION_UP:
+								Joy3Bttns[x] = false;
+								break;
+						}
+						return false;
+					}
+				});
+		}
 	}
 
 	// Joystick 1
@@ -132,6 +167,17 @@ public class Controls {
 		public boolean onChange(byte xAxis, byte yAxis) {
 			joy2X = xAxis;
 			joy2Y = yAxis;
+			return false;
+		}
+	};
+	
+	// Joystick 3
+	OnChangeListener joyListener3 = new OnChangeListener() {
+
+		@Override
+		public boolean onChange(byte xAxis, byte yAxis) {
+			joy3X = xAxis;
+			joy3Y = yAxis;
 			return false;
 		}
 	};
@@ -157,6 +203,17 @@ public class Controls {
 			}
 
 		};
+		
+	//Throttle 3
+	OnChangeListenerThrottle throttleListener3 = new OnChangeListenerThrottle() {
+
+		@Override
+		public boolean onChange(byte axis) {
+			throttleAxis3 = axis;
+			return false;
+		}
+
+	};
 
 	// Enable button
 	OnCheckedChangeListener enableListener = new OnCheckedChangeListener() {
